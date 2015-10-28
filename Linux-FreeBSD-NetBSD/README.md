@@ -4,7 +4,7 @@
 
 use ramfs
 
-* `mount -t ramfs ramfs /mnt/ramfs`   default use half size of ram 
+* `mount -t ramfs ramfs /mnt/ramfs`   default use half size of ram   (資料夾mount是永久設定,但檔案會重開機就消失)
 * `mount -t ramfs ramfs /mnt/ramfs -o size=200m`  Otherwise, use -o size to set ram size
 
 
@@ -19,4 +19,4 @@ use ramfs
 
 ## NetBSD
 
-* `mount_mfs -s 200m swap /home/ray/testmd`  
+* `mount_mfs -s 200m swap /home/ray/testmd` (每次reboot就要重設定)
