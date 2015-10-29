@@ -20,3 +20,19 @@ use ramfs
 ## NetBSD
 
 * `mount_mfs -s 200m swap /home/ray/testmd` (每次reboot就要重設定)
+
+# Nginx Tuning
+
+## FreeBSD
+* `sysctl kern.ipc.somaxconn=4096`
+* IN nginx.conf : set queue length after listen port   `listen  80  backlog=1024;`
+* `sysctl net.inet.tcp.fast_finwait2_recycle=1`
+
+## NetBSD
+* 
+```
+sysctl -w kern.maxproc = 6072
+sysctl -w kern.maxfiles = 65536
+net.inet.tcp.syn_bucket_limit
+ulimit 
+```
