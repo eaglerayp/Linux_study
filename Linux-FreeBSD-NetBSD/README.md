@@ -24,12 +24,13 @@ use ramfs
 # Nginx Tuning
 
 ## FreeBSD
-* `sysctl kern.ipc.somaxconn=4096`
+```
+sysctl kern.ipc.somaxconn=4096
+sysctl net.inet.tcp.fast_finwait2_recycle=1
+```
 * IN nginx.conf : set queue length after listen port   `listen  80  backlog=1024;`
-* `sysctl net.inet.tcp.fast_finwait2_recycle=1`
 
 ## NetBSD
-* 
 ```
 sysctl -w kern.maxproc = 6072
 sysctl -w kern.maxfiles = 65536
