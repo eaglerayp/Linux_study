@@ -9,5 +9,26 @@
 5. `rmmod e1000e`
 6. `modprobe e1000e` //can add parameter e.g., `modprobe e1000e InterruptThrottleRate=3` (default)
 
-
 ## IOAT/DCA
+* reference: http://timetobleed.com/enabling-bios-options-on-a-live-server-with-no-rebooting/
+* 確認ioat support NIC, chipsets 
+* `modprobe ioatdma`
+* check support of dca:  `cpuid |grep -i dca`  
+* `lsmod` should include:
+```
+Module                  Size  Used by
+ioatdma                63443  0 
+dca                    15130  1 ioatdma
+```
+
+## netmap
+```
+insmod netmap.ko
+modinfo ixgbe/ixgbe.ko | grep ^depend   (check module dependencies)
+modprobe dca
+modprobe mdio
+insmod ixgbe/ixgbe.ko
+rmmod e1000e //update module dependency
+insmod e1000e/e1000e.ko
+```
+單機測試 ：netmap>ioat>normal  (Request per second:  43443>41987>41206)
