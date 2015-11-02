@@ -24,7 +24,7 @@ use ramfs
 # Nginx Tuning
 
 ## LINUX
-* sysctl kern.ipc.somaxconn=4096
+* `sysctl -w net.core.somaxconn=4096`
 
 ## FreeBSD
 ```
