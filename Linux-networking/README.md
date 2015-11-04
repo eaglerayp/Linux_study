@@ -129,7 +129,7 @@
 * net.ipv4.tcp_fastopen = 1 (allow fast TCP connection, client利用cookie(IP and MAC加密),在reconnect 不用3 way handshake,省下1 RTT)
 * net.ipv4.tcp_fastopen_key = a0d3dffc-6a819259-efb132a7-fad7fb21 (using by fastopen)
 * net.ipv4.tcp_fin_timeout = 60 
-* net.ipv4.tcp_frto = 2 (F-RTO is an enhanced recovery algorithm for TCP retransmission	timeouts. used when network unstable, RTT change scenario, conflict with MTU probe) [reference](http://blog.csdn.net/zhangskd/article/details/7446441)
+* net.ipv4.tcp_frto = 2 (F-RTO is an enhanced recovery algorithm for TCP retransmission	timeouts. used when network unstable, RTT change scenario, conflict with MTU probe, 主要應用情境是行動用戶在不同的wi-fi/3G/4G環境移動,轉換AP導致RTO,但其實他們有收到資料,F-RTO主要避免這類型的重傳) [reference](http://blog.csdn.net/zhangskd/article/details/7446441)
 * check TCP connection alive
   * net.ipv4.tcp_keepalive_intvl = 15 (see tuning)
   * net.ipv4.tcp_keepalive_probes = 3
