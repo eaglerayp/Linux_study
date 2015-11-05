@@ -50,6 +50,7 @@ sysctl net.inet.tcp.fast_finwait2_recycle=1
 
 ## NetBSD
 * /etc/login.conf  /etc/sysctl.conf
+* after setup sysctl.conf, reboot or `service sysctl restart`
 ```
 sysctl -w kern.maxproc=6072
 sysctl -w kern.maxfiles=65536
