@@ -1,5 +1,19 @@
-# Ramdisk
+# Setup (example for setup Nginx)
 
+## NetBSD
+* install process:  file system format: ffs  remember to install binary pkg
+* package management: pkgin
+* `useradd -m -G wheel ray`
+* `passwd ray (setting pw)`
+* login settings conf: /etc/rc.conf
+* `pkgin install wget`
+* `pkgin install pcre`
+* `cp /usr/pkg/lib/libpcre* /usr/lib/`
+* wget nginx.tar.gz
+* install nginx at ramdisk
+
+# Ramdisk
+can use `df -h` to check
 ## LINUX
 
 use ramfs
@@ -19,7 +33,8 @@ use ramfs
 
 ## NetBSD
 
-* `mount_mfs -s 200m swap /home/ray/testmd` (每次reboot就要重設定)
+* `mkdir /home/ray/ramdisk`
+* `mount_mfs -s 200m swap /home/ray/ramdisk` (每次reboot就要重設定)
 
 # Nginx Tuning
 
@@ -34,9 +49,20 @@ sysctl net.inet.tcp.fast_finwait2_recycle=1
 * IN nginx.conf : set queue length after listen port   `listen  80  backlog=1024;`
 
 ## NetBSD
+* /etc/login.conf  /etc/sysctl.conf
 ```
-sysctl -w kern.maxproc = 6072
-sysctl -w kern.maxfiles = 65536
-net.inet.tcp.syn_bucket_limit
-ulimit 
+sysctl -w kern.maxproc=6072
+sysctl -w kern.maxfiles=65536
+sysctl -w net.inet.tcp.syn_bucket_limit=4000
+ulimit -n 65535
+ulimit -s 10000 kB
+net.inet.tcp.recvbuf_auto = 1
+net.inet.tcp.recvbuf_inc = 16384
+net.inet.tcp.recvbuf_max = 262144
+net.inet.tcp.sendbuf_auto = 1
+net.inet.tcp.sendbuf_inc = 8192
+net.inet.tcp.sendbuf_max = 262144
+net.inet.tcp.sendspace = 32768
+net.inet.tcp.recvspace = 32768
+rfc 1323
 ```
