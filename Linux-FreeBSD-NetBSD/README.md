@@ -1,7 +1,11 @@
 # Setup (example for setup Nginx)
 
 ## NetBSD
-* install process:  file system format: ffs  remember to install binary pkg
+* install process:  file system format: ffs  remember to install binary pkg or install pkgin below:
+```
+export PKG_PATH="http://ftp.netbsd.org/pub/pkgsrc/packages/NetBSD/amd64/7.0/All/"
+pkg_add -v pkgin
+```
 * package management: pkgin
 * `useradd -m -G wheel ray`
 * `passwd ray (setting pw)`
