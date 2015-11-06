@@ -12,6 +12,20 @@
 * wget nginx.tar.gz
 * install nginx at ramdisk
 
+
+## FreeBSD  
+* [setup reference](http://www.mobile01.com/topicdetail.php?f=300&t=2665811)
+* package management: port system-portmaster or **pkg**
+* warning: don't use make install on port system to install vim, very long time!!
+* using portmaster
+``` 
+cd /usr/ports/ports-mgmt/portmaster
+make install clean
+```
+* `pkg install pcre`
+* fetch nginx.tar.gz
+* install nginx at ramdisk
+
 # Ramdisk
 can use `df -h` to check
 ## LINUX
