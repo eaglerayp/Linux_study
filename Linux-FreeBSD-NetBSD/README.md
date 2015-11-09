@@ -72,16 +72,6 @@ sysctl net.inet.tcp.fast_finwait2_recycle=1
 ```
 sysctl -w kern.maxproc=6072
 sysctl -w kern.maxfiles=65536
-sysctl -w net.inet.tcp.syn_bucket_limit=4000
 ulimit -n 65535
 ulimit -s 10000 kB
-net.inet.tcp.recvbuf_auto = 1
-net.inet.tcp.recvbuf_inc = 16384
-net.inet.tcp.recvbuf_max = 262144
-net.inet.tcp.sendbuf_auto = 1
-net.inet.tcp.sendbuf_inc = 8192
-net.inet.tcp.sendbuf_max = 262144
-net.inet.tcp.sendspace = 32768
-net.inet.tcp.recvspace = 32768
-rfc 1323
 ```
