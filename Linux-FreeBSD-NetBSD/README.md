@@ -31,6 +31,15 @@ make install clean
 * fetch nginx.tar.gz
 * install nginx at ramdisk
 
+## Ubuntu
+* `sudo apt-get update`
+* `sudo apt-get install libpcre3 libpcre3-dev`
+* `sudo apt-get install zlib1g zlib1g-dev`
+* `sudo apt-get install gcc`
+* `sudo apt-get install make`
+* wget nginx.tar.gz
+* install nginx at ramdisk
+
 # Ramdisk
 can use `df -h` to check
 ## LINUX
