@@ -10,6 +10,7 @@ pkg_add -v pkgin
 * `useradd -m -G wheel ray`
 * `passwd ray (setting pw)`
 * login settings conf: /etc/rc.conf
+* `pkg_add -v ftp://ftp.netbsd.org/pub/pkgsrc/packages/NetBSD/amd64/7.0/All/libidn-1.32.tgz` install libidn for wget
 * `pkgin install wget`
 * `pkgin install pcre`
 * `cp /usr/pkg/lib/libpcre* /usr/lib/`
