@@ -1,14 +1,16 @@
 #LINUX Intel support
 
 ## NAPI
-* reference: README and manual page from Intel Linux Driver e1000e https://gist.github.com/pklaus/319367
-1. update intel driver (Linux default too old, **NAPI is default setting** in the new version driver)
-2. `wget https://downloadmirror.intel.com/15817/eng/e1000e-3.2.4.2.tar.gz` 
-3. cd /e1000e-../src/
-4. `make`
-5. `make install` (It will remove old driver and put on lib/modules/3.13.0-37-generic/kernel/drivers/net/ethernet/intel/e1000e/e1000e.ko)
-6. `rmmod e1000e`
-7. `modprobe e1000e` //can add parameter e.g., `modprobe e1000e InterruptThrottleRate=3` (default)
+1. reference: README and manual page from Intel Linux Driver e1000e https://gist.github.com/pklaus/319367
+2. update intel driver (Linux default too old, **NAPI is default setting** in the new version driver)
+3. `wget https://downloadmirror.intel.com/15817/eng/e1000e-3.2.4.2.tar.gz` 
+4. cd /e1000e-../src/
+5. `make`
+6. `make install` (It will remove old driver and put on lib/modules/3.13.0-37-generic/kernel/drivers/net/ethernet/intel/e1000e/e1000e.ko) , maybe encounter error, try 
+`export LANGUAGE=en_US.UTF-8 export LANG=en_US.UTF-8 export LC_ALL=en_US.UTF-8`
+7. `rmmod e1000e`
+8. `modprobe e1000e` //can add parameter e.g., `modprobe e1000e InterruptThrottleRate=3` (default)
+9. modinfo e1000e should see version:3.2.4.2-NAPI
 
 ## IOAT/DCA
 * reference: http://timetobleed.com/enabling-bios-options-on-a-live-server-with-no-rebooting/
@@ -23,13 +25,18 @@ dca                    15130  1 ioatdma
 ```
 
 ## netmap
-* check OS: https://github.com/luigirizzo/netmap
-* git clone
+* prerequisites: linux source
 ```
+git clone https://github.com/luigirizzo/netmap.git
+cd netmap/LINUX
+apt-get source linux-image-$(uname -r)
+./configure --kernel-sources=$(pwd)/linux-lts-vivid-3.19.0 
+make
 insmod netmap.ko
 modinfo ixgbe/ixgbe.ko | grep ^depend   (check module dependencies)
 modprobe dca
 modprobe mdio
+modprobe vxlan
 insmod ixgbe/ixgbe.ko
 rmmod e1000e //update module dependency
 insmod e1000e/e1000e.ko
