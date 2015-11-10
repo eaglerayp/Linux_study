@@ -139,7 +139,7 @@
 * net.ipv4.tcp_max_ssthresh = 0 (set slow start's max ending condition)
 * net.ipv4.tcp_max_syn_backlog = 8192 (control the packets queue length, cost 64 bytes per entry, maxlen 65535)
 * net.ipv4.tcp_max_tw_buckets = 65536 (Maximal number of timewait sockets, should larger)
-* net.ipv4.tcp_mem = 3145728 4718592 6291456 (unit PAGESIZE=4096Bytes  use half > RAM MIN:12GB, >16GB enter the "memory pressure" mode. MAX 24GB)
+* net.ipv4.tcp_mem = 2147483648 3221225472 4294967296 (unit PAGESIZE=4096Bytes  use half > RAM e.g.,MIN:2GB, >3GB enter the "memory pressure" mode. MAX 4GB)
 * net.ipv4.tcp_min_tso_segs = 2 (Minimal number of segments per TSO frame)
 * net.ipv4.tcp_moderate_rcvbuf = 1 (enable buffer auto-tuning)
 * net.ipv4.tcp_mtu_probing = 0 (Enable TCP MTU Probing in order to deal with black hole routers)
@@ -164,7 +164,8 @@
 * net.ipv4.tcp_tw_recycle = 1 (CASCADE with tcp_timestamps, decrease the dead SOCKET WAIT TIME)
 * net.ipv4.tcp_tw_reuse = 1 
 * net.ipv4.tcp_window_scaling = 1 (allow tcp window size >65535)
-* net.ipv4.tcp_wmem = 4096	16384	4194304
+* net.ipv4.tcp_rmem = 4096 87380 33554432 (set max to 16MB for 1GE, and 32M+ for 10GE)
+* net.ipv4.tcp_wmem = 4096 65536 33554432 (set max to 16MB for 1GE, and 32M+ for 10GE)
 * net.ipv4.tcp_workaround_signed_windows = 0
 * net.ipv4.udp_mem = 94416	125890	188832
 * net.ipv4.udp_rmem_min = 4096
