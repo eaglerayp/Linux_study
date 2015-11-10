@@ -1,25 +1,24 @@
 #    Network tuning
 ---
 ### tuning kernel parameters
-* control the kernel-based socket buffer
-  * in etc/sysctl.conf **net.core.wmem_default**; **net.core.rmem_default**  max >=8MB(8388608)
+* control the kernel-based socket buffer set max to 256M+ for 10GE
+  * net.core.rmem_max = 268435456
+  * net.core.wmem_max = 268435456
+  * net.core.wmem_default; net.core.rmem_default
 * control the packets queue length in **net.core.netdev_max_backlog** >=8000
-* control the maximun connections **net.core.somaxconn** >=1024 to prevent new connection dropped (max 65535)
+* control the listen backlog **net.core.somaxconn** >=1024 to prevent new connection dropped (max 65535)
 
 ### tuning TCP 
 * **TCP total memory** 
-  * net.ipv4.tcp_mem = 3145728 4718592 6291456 (unit PAGESIZE=4096Bytes  可將一半的RAM用在這;12,16,24 >16GB enter the "memory pressure" warning. MAX 24GB)
-* socket buffer size, should be considered with TCP buffer
-  * **net.core.optmem_max** 
-  * **net.core.rmem_default** 
-  * **net.core.rmem_max** 
-  * **net.core.wmem_default** 
-  * **net.core.wmem_max**
-* **tuning TCP wmem and rmem**'s default buffer size if loss packet : **net.ipv4.tcp_wmem** about 1/500 of server RAM  
+  * net.ipv4.tcp_mem = 524288 786432 1048576 (unit=PAGESIZE=4096Bytes; 可將一半的RAM用在這; in 8G host: 2,3,4 >3GB enter the "memory pressure" warning. MAX 4GB)
+* **tuning TCP wmem and rmem**'s default buffer size set max to 16MB for 1GE, and 32M+ for 10GE:
+  * net.ipv4.tcp_rmem = 4096 87380 33554432
+  * net.ipv4.tcp_wmem = 4096 65536 33554432 
 * net.ipv4.tcp_max_orphans = 65536 (sockets that no connect with any process (appliaction closed,but TCP still not fin), over half would warning may cost RAM 2GB, can increase this if warning) 
 * net.ipv4.tcp_max_tw_buckets = 65536 (Maximal number of timewait sockets, should larger)
 * net.ipv4.tcp_low_latency = 0 (true for latency; high for throughput)
-* **Optimizing connections**
+
+#### **Optimizing connections**
 * prevent connection lost for TCP syn queue per port in **net.ipv4.tcp_max_syn_backlog** >=8192
 * detect failing connections, decrease **net.ipv4.tcp_synack_retries** <=3 
 * **net.ipv4.tcp_retries2** control the resend times with already connect user, default high because drop the connected user is hurt, but retry too many times for dead user cost high, keep retries2 >synack_retries (=5)
