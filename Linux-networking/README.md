@@ -139,7 +139,7 @@
 * net.ipv4.tcp_max_ssthresh = 0 (set slow start's max ending condition)
 * net.ipv4.tcp_max_syn_backlog = 8192 (control the packets queue length, cost 64 bytes per entry, maxlen 65535)
 * net.ipv4.tcp_max_tw_buckets = 65536 (Maximal number of timewait sockets, should larger)
-* net.ipv4.tcp_mem = 2147483648 3221225472 4294967296 (unit PAGESIZE=4096Bytes  use half > RAM e.g.,MIN:2GB, >3GB enter the "memory pressure" mode. MAX 4GB)
+* net.ipv4.tcp_mem = 524288 786432 1048576 (unit=PAGESIZE=4096Bytes; 可將一半的RAM用在這; in 8G host: 2,3,4 >3GB enter the "memory pressure" warning. MAX 4GB)
 * net.ipv4.tcp_min_tso_segs = 2 (Minimal number of segments per TSO frame)
 * net.ipv4.tcp_moderate_rcvbuf = 1 (enable buffer auto-tuning)
 * net.ipv4.tcp_mtu_probing = 0 (Enable TCP MTU Probing in order to deal with black hole routers)
