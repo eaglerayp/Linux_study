@@ -46,7 +46,8 @@ can use `df -h` to check
 
 use ramfs
 
-* `mount -t ramfs ramfs /mnt/ramfs`   default use half size of ram   (資料夾mount是永久設定,但檔案會重開機就消失)
+* `mount -t ramfs ramfs /mnt/ramfs`   default use half size of ram   
+* Linux-mint:資料夾mount是永久設定,但檔案會重開機就消失  Ubuntu:資料夾重開機會在但不是ramdisk需重新設定
 * `mount -t ramfs ramfs /mnt/ramfs -o size=200m`  Otherwise, use -o size to set ram size
 
 
