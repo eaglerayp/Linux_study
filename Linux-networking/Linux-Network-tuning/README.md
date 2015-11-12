@@ -1,6 +1,11 @@
 #    Network tuning
 ---
 ### tuning kernel parameters
+* fs.file-max = 1048576  and /etc/security/limits.conf 
+```
+*       soft    nofile  1048576  
+*       hard    nofile  1048576
+```
 * control the kernel-based socket buffer set max to 256M+ for 10GE
   * net.core.rmem_max = 268435456
   * net.core.wmem_max = 268435456
