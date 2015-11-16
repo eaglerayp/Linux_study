@@ -38,7 +38,7 @@
 
 ### Network Environment
 * **tcp_congestion_control** : 現在通行的cubic (是為了 high bandwidth networks with high latency), or reno: [performance comparison](http://journal.info.unlp.edu.ar/journal/journal35/papers/JCST-Apr13-1.pdf)
-* net.ipv4.tcp_fastopen = 1 (allow fast TCP connection, client利用cookie (IP and MAC加密),在reconnect 不用3 way handshake,省下1 RTT, 行動和無線應該假設容易lost connection所以要開啟)
+* net.ipv4.tcp_fastopen = 3 (bitmask format,3=send/listen fastopen socket, allow fast TCP connection, client利用cookie (IP and MAC加密),在reconnect 不用3 way handshake,省下1 RTT, 行動和無線應該假設容易lost connection所以要開啟)
 * 網路容易變動(可能因為移動在不同的wireless切換 或wireless<==>3G/4G)  ([F-RTO](http://blog.csdn.net/zhangskd/article/details/7446441) 與MTU probing互斥) 
   * net.ipv4.tcp_frto = 2 (F-RTO is an enhanced recovery algorithm for TCP retransmission timeouts. used when network unstable 因為RTT改變所以需要判斷RTO是否真實)  可搭配 tcp_low_latency =1  (在Lossy Wireless Networks開啟可使retransmit更頻繁)
   * net.ipv4.tcp_mtu_probing = 0 (探索black hole router:1.因為mtu size不對而被drop卻沒通知 2.router斷了卻沒更新其他router的table) 
