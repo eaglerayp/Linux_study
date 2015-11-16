@@ -14,6 +14,13 @@
 * control the listen backlog **net.core.somaxconn** >=1024 to prevent new connection dropped (max 65535)
 
 ### tuning TCP 
+* initial congestion window size: 10, default on Linux is 10, check by source code:
+```
+grep -A 2 initcwnd `find /usr/src/linux-3.13.0/include/ -type f -iname '*h'` 
+```
+* RTO value is adaptive in LINUX.
+* LINUX 3.2+ have implemented Google Proportional Rate Reduction for TCP (PRR). (improved loss recovery algo.)
+* net.ipv4.tcp_slow_start_after_idle  maybe=0 can improve performance.
 * **TCP total memory** 
   * net.ipv4.tcp_mem = 524288 786432 1048576 (unit=PAGESIZE=4096Bytes; 可將一半的RAM用在這; in 8G host: 2,3,4 >3GB enter the "memory pressure" warning. MAX 4GB)
 * **tuning TCP wmem and rmem**'s default buffer size set max to 16MB for 1GE, and 32M+ for 10GE:
