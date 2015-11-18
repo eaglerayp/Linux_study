@@ -29,6 +29,7 @@ dca                    15130  1 ioatdma
 ```
 git clone https://github.com/luigirizzo/netmap.git
 cd netmap/LINUX
+sudo apt-get install dpkg-dev
 apt-get source linux-image-$(uname -r)
 ./configure --kernel-sources=$(pwd)/linux-lts-vivid-3.19.0 
 make
@@ -41,4 +42,4 @@ insmod ixgbe/ixgbe.ko
 rmmod e1000e //update module dependency
 insmod e1000e/e1000e.ko
 ```
-HP ProDesk 490 G2 testing:netmap>NAPI>normal (Request per second:  75681>74825>61307) IOAT HW not support
+
