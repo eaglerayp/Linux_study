@@ -83,3 +83,13 @@ sysctl -w kern.maxfiles=65536
 ulimit -n 65535
 ulimit -s 10000 kB
 ```
+
+# Control Cpu 
+
+## Ubuntu 14.04
+* in `/etc/default/grub`: control maxcpus, if need cpu freq disable intel pstate  
+`GRUB_CMDLINE_LINUX_DEFAULT="maxcpus=2 intel_pstate=disable"` 
+`update-grub`
+* `sudo apt-get install cpufreq-utils`
+* cpufreq-info
+* `sudo cpufreq-set -c 1 -g userspace -d 800Mhz -u 800MHz` core 1 -u:max -d min  freq
