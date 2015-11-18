@@ -33,17 +33,14 @@ make install clean
 
 ## Ubuntu
 * `sudo apt-get update`
-* `sudo apt-get install libpcre3 libpcre3-dev`
-* `sudo apt-get install zlib1g zlib1g-dev`
-* `sudo apt-get install gcc`
-* `sudo apt-get install make`
+* `sudo apt-get -y install libpcre3 libpcre3-dev zlib1g zlib1g-dev make gcc`
 * wget nginx.tar.gz
 * install nginx at ramdisk
 
 # Ramdisk
 can use `df -h` to check
-## LINUX
 
+## LINUX
 use ramfs
 
 * `mount -t ramfs ramfs /mnt/ramfs`   default use half size of ram   
