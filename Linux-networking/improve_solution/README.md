@@ -11,6 +11,7 @@
 7. `rmmod e1000e`
 8. `modprobe e1000e` //can add parameter e.g., `modprobe e1000e InterruptThrottleRate=3` (default)
 9. modinfo e1000e should see version:3.2.4.2-NAPI
+10. if set InterruptThrottleRate=3000, can see largest interrupt rate=3000/s in `watch -n 1 cat /proc/interrupts`
 
 ## IOAT/DCA
 * reference: http://timetobleed.com/enabling-bios-options-on-a-live-server-with-no-rebooting/
