@@ -1,5 +1,10 @@
 #    Network tuning
 ---
+
+### HOW TO UPDATE
+* update /etc/sysctl.conf  (`vim /etc/sysctl.conf`) and `sysctl -p `
+* Otherwise, update one by one : for example: `sysctl -w net.ipv4.tcp_max_syn_backlog = 8192`
+
 ### tuning kernel parameters
 * fs.file-max = 1048576  and /etc/security/limits.conf 
 ```
