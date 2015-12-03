@@ -1,5 +1,9 @@
 # Build-and-install-linux-kernel under Ubuntu
 
+### Kernel config
+* `CONFIG_CLZ_TAB=y , CONFIG_CORDIC=m` 這類的都是Kernel compile options！！
+* [check kernel config](http://stackoverflow.com/questions/14376540/view-linux-kernel-config-options)
+
 ### Build by debian (會含ubuntu的套件)
 
 Get source:   
