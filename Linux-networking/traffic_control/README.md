@@ -13,6 +13,7 @@
 divisor只能是2的次方數, depth最多只有127; 集中流量的情況(apache benchmark)容易drop pkts. 
   * depth最多128,所以在頻寬使用滿時,瞬間某連線過大流量會drop.
 * TBF: token bucket 的演算法, 只有一桶, 累積的token可以在burst的時候消耗, 只會限速！  
+`tc qdisc add dev eth1 root tbf rate 1000mbit burst 20mb latency 100ms`
   * 計算burst的方式： 首先找出系統頻率 
 `egrep '^CONFIG_HZ_[0-9]+' /boot/config-$(uname -r)`  
 burst 至少> rate(bits)/ Hz =bits 再轉成bytes, e.g., 10mbps  250Hz system: burst =10m/250=40kbits 因為burst=bucket size,
