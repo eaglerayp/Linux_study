@@ -6,12 +6,15 @@
 ## qdisc - classless
 * PFIFO-FAST: (default), 三條queue組成的priority fifo queue, 由ToS分類,只會smooth和schedule packets.
 * SFQ: max buckets:65536 len:127 after Linux-3.3. 流量到達網卡上限才會作用,
-為1.Source address 2.Destination address 3.Source port做HASH分到buckets queue, 
+為1.Source address 2.Destination address 3.Source+Destination port做HASH分到buckets queue, 
 因為HASH還是會有conflict,所以每過了perturb時間後就會更新parameter產生新的HASH算法,所以可以減少隨機性的bucket過重.
 只會smooth和schedule packets.  
-`sudo tc qdisc add dev eth1 root sfq perturb 10 divisor 65536`  
+`sudo tc qdisc add dev eth1 root sfq perturb 10 divisor 65536 flows 65408 limit 8388608`  
 divisor只能是2的次方數, depth最多只有127; 集中流量的情況(apache benchmark)容易drop pkts. 
-  * depth最多128,所以在頻寬使用滿時,瞬間某連線過大流量會drop.
+  * depth 最多128 pkts,所以在頻寬使用滿時,瞬間某連線過大流量會drop. need recompile to change.
+  * flows 是 sfq source code裡面 flow array的大小,在rehash的時候負責搬運原有的queue, flow在code裡面設定的上限是65408! need recompile to change.
+  * limit是整個SFQ的queue size, 也就是divisors X depth. **hard limit:會覆蓋掉sfq的queue size,但是預設參數超小導致會有一直drop的情況**！！
+  * 因為是公平求high throughput的演算法, 所以平均latency高, 一般搭配 prio使用, 讓重要的low latency connection不受影響！
 * TBF: token bucket 的演算法, 只有一桶, 累積的token可以在burst的時候消耗, 只會限速！  
 `sudo tc qdisc add dev eth1 root tbf rate 1000mbit burst 20mb latency 100ms`
   * 計算burst的方式： 首先找出系統頻率 
