@@ -37,8 +37,7 @@ grep -A 2 initcwnd `find /usr/src/linux-3.13.0/include/ -type f -iname '*h'`
 
 #### **Optimizing connections**
 * prevent connection lost for TCP syn queue per port in **net.ipv4.tcp_max_syn_backlog** >=8192
-* detect failing connections, decrease **net.ipv4.tcp_synack_retries** <=3 
-* **net.ipv4.tcp_retries2** control the resend times with already connect user, default high because drop the connected user is hurt, but retry too many times for dead user cost high, keep retries2 >synack_retries (=5)
+* detect failing connections, decrease **net.ipv4.tcp_synack_retries** <=3 (unack後retransmit幾次), **net.ipv4.tcp_retries2** control the resend times with already connect user(retransmit又fail後再試幾次決定它斷線), default high because drop the connected user is hurt, but retry too many times for dead user cost high, keep retries2 >synack_retries (=5)
 * **net.ipv4.tcp_fin_timeout** = 60
 * **net.ipv4.tcp_keepalive_time** control the idle connection live time, decrease it when server busy (=900 sec) 
 * **net.ipv4.tcp_keepalive_probes** control the number of packets to check dead , faster for small number (=3)
