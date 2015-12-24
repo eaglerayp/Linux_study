@@ -49,6 +49,7 @@ grep -A 2 initcwnd `find /usr/src/linux-3.13.0/include/ -type f -iname '*h'`
 
 ### Network Environment
 * **tcp_congestion_control** : 現在通行的cubic (是為了 high bandwidth networks with high latency), or reno: [performance comparison](http://journal.info.unlp.edu.ar/journal/journal35/papers/JCST-Apr13-1.pdf)
+  * htcp 常被推薦在10G網路使用  開啟方法：`modprobe tcp_htcp && sysctl -w net.ipv4.tcp_congestion_control=htcp` 
 * net.ipv4.tcp_fastopen = 3 (bitmask format,3=send/listen fastopen socket, allow fast TCP connection, client利用cookie (IP and MAC加密),在reconnect 不用3 way handshake,省下1 RTT, 行動和無線應該假設容易lost connection所以要開啟)
 * 網路容易變動(可能因為移動在不同的wireless切換 或wireless<==>3G/4G)  ([F-RTO](http://blog.csdn.net/zhangskd/article/details/7446441) 與MTU probing互斥) 
   * net.ipv4.tcp_frto = 2 (F-RTO is an enhanced recovery algorithm for TCP retransmission timeouts. used when network unstable 因為RTT改變所以需要判斷RTO是否真實)  可搭配 tcp_low_latency =1  (在Lossy Wireless Networks開啟可使retransmit更頻繁)
