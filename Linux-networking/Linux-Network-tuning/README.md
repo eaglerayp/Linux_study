@@ -37,8 +37,7 @@ grep -A 2 initcwnd `find /usr/src/linux-3.13.0/include/ -type f -iname '*h'`
 
 #### **Optimizing connections**
 * prevent connection lost for TCP syn queue per port in **net.ipv4.tcp_max_syn_backlog** >=8192
-* detect failing connections, decrease **net.ipv4.tcp_synack_retries** <=3 
-* **net.ipv4.tcp_retries2** control the resend times with already connect user, default high because drop the connected user is hurt, but retry too many times for dead user cost high, keep retries2 >synack_retries (=5)
+* detect failing connections, decrease **net.ipv4.tcp_synack_retries** <=3 (unack後retransmit幾次), **net.ipv4.tcp_retries2** control the resend times with already connect user(retransmit又fail後再試幾次決定它斷線), default high because drop the connected user is hurt, but retry too many times for dead user cost high, keep retries2 >synack_retries (=5)
 * **net.ipv4.tcp_fin_timeout** = 60
 * **net.ipv4.tcp_keepalive_time** control the idle connection live time, decrease it when server busy (=900 sec) 
 * **net.ipv4.tcp_keepalive_probes** control the number of packets to check dead , faster for small number (=3)
@@ -50,6 +49,7 @@ grep -A 2 initcwnd `find /usr/src/linux-3.13.0/include/ -type f -iname '*h'`
 
 ### Network Environment
 * **tcp_congestion_control** : 現在通行的cubic (是為了 high bandwidth networks with high latency), or reno: [performance comparison](http://journal.info.unlp.edu.ar/journal/journal35/papers/JCST-Apr13-1.pdf)
+  * htcp 常被推薦在10G網路使用  開啟方法：`modprobe tcp_htcp && sysctl -w net.ipv4.tcp_congestion_control=htcp` 
 * net.ipv4.tcp_fastopen = 3 (bitmask format,3=send/listen fastopen socket, allow fast TCP connection, client利用cookie (IP and MAC加密),在reconnect 不用3 way handshake,省下1 RTT, 行動和無線應該假設容易lost connection所以要開啟)
 * 網路容易變動(可能因為移動在不同的wireless切換 或wireless<==>3G/4G)  ([F-RTO](http://blog.csdn.net/zhangskd/article/details/7446441) 與MTU probing互斥) 
   * net.ipv4.tcp_frto = 2 (F-RTO is an enhanced recovery algorithm for TCP retransmission timeouts. used when network unstable 因為RTT改變所以需要判斷RTO是否真實)  可搭配 tcp_low_latency =1  (在Lossy Wireless Networks開啟可使retransmit更頻繁)
