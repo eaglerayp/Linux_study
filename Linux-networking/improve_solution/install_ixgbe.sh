@@ -22,10 +22,12 @@ cd ixgbe-4.3.13/src
 make
 make install 
 rmmod ixgbe
-modprobe ixgbeInterruptThrottleRate=$1,$1 RSS=16
+modprobe ixgbe InterruptThrottleRate=$1,$1 RSS=16
 echo "modprobe ixgbe driver successfully"
-echo ixgbe InterruptThrottleRate=$1,$1 RSS=16 >> /etc/module
+echo ixgbe >> /etc/modules
+echo options ixgbe InterruptThrottleRate=$1,$1 >> /etc/modprobe.d/ixgbe.conf
+echo options ixgbe RSS=16 >> /etc/modprobe.d/ixgbe.conf
 
-ifup p6p1
-ifup p6p2
-ifconfig
+# ifup p6p1
+# ifup p6p2
+# ifconfig
