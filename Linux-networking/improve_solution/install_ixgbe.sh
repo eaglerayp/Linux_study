@@ -22,12 +22,12 @@ cd ixgbe-4.3.13/src
 make
 make install 
 rmmod ixgbe
-modprobe ixgbe InterruptThrottleRate=$1,$1 RSS=16
+modprobe ixgbe #InterruptThrottleRate=$1,$1 RSS=16
 echo "modprobe ixgbe driver successfully"
 echo ixgbe >> /etc/modules
-echo options ixgbe InterruptThrottleRate=$1,$1 >> /etc/modprobe.d/ixgbe.conf
-echo options ixgbe RSS=16 >> /etc/modprobe.d/ixgbe.conf
+#echo options ixgbe InterruptThrottleRate=$1,$1 >> /etc/modprobe.d/ixgbe.conf
+#echo options ixgbe RSS=16 >> /etc/modprobe.d/ixgbe.conf
+service irqbalance stop
 
-# ifup p6p1
-# ifup p6p2
-# ifconfig
+# jumbo frames
+#ifconfig <eth> mtu 9000 txqueuelen 1000 up
