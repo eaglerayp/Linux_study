@@ -27,6 +27,7 @@ echo "modprobe ixgbe driver successfully"
 echo ixgbe >> /etc/modules
 #echo options ixgbe InterruptThrottleRate=$1,$1 >> /etc/modprobe.d/ixgbe.conf
 #echo options ixgbe RSS=16 >> /etc/modprobe.d/ixgbe.conf
+update-initramfs -u
 service irqbalance stop
 
 # jumbo frames
