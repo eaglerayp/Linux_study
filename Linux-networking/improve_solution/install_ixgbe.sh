@@ -30,5 +30,5 @@ echo ixgbe >> /etc/modules
 update-initramfs -u
 service irqbalance stop
 
-# jumbo frames
-#ifconfig <eth> mtu 9000 txqueuelen 1000 up
+# jumbo frames 8450 for vxlan (additonal header); txqueuelen for 10gbe
+# sudo echo "/sbin/ifconfig <eth> mtu 8450 txqueuelen 10000" >> /etc/rc.local
