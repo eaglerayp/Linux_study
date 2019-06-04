@@ -42,7 +42,7 @@ grep -A 2 initcwnd `find /usr/src/linux-3.13.0/include/ -type f -iname '*h'`
 * **net.ipv4.tcp_keepalive_time** control the idle connection live time, decrease it when server busy (=900 sec) 
 * **net.ipv4.tcp_keepalive_probes** control the number of packets to check dead , faster for small number (=3)
 * **net.ipv4.tcp_keepalive_intvl** control the time interval between sending probes, shorter for busy server (=15)
-* allow reusing a TIME-WAIT socket (just viewed dead) using **net.ipv4.tcp_tw_reuse**=1 and **net.ipv4.tcp_tw_recycle**=1
+* allow reusing a TIME-WAIT socket (just viewed dead) using **net.ipv4.tcp_tw_reuse**=1
 *  **net.ipv4.tcp_tso_win_divisor** control 1 TSO can simultaneously use how many congestion window. (2-16)
 
 # Discussion

@@ -161,7 +161,6 @@
 * net.ipv4.tcp_thin_linear_timeouts = 0 (for thin stream)
 * net.ipv4.tcp_timestamps = 1
 * net.ipv4.tcp_tso_win_divisor = 8 (controls how much of the tcp congestion window is consumed by a single TSO frame)
-* net.ipv4.tcp_tw_recycle = 1 (CASCADE with tcp_timestamps, decrease the dead SOCKET WAIT TIME)
 * net.ipv4.tcp_tw_reuse = 1 
 * net.ipv4.tcp_window_scaling = 1 (allow tcp window size >65535)
 * net.ipv4.tcp_rmem = 4096 87380 33554432 (set max to 16MB for 1GE, and 32M+ for 10GE)
